@@ -1,32 +1,37 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  authentication: {
-    password: {
+const UserSchema = new mongoose.Schema(
+  {
+    username: {
       type: String,
       required: true,
-      select: false, // ! Avoid sending password in response
     },
-    salt: {
+    email: {
       type: String,
       required: true,
-      select: false, // ! Avoid sending salt in response
     },
-    sessionToken: {
-      type: String,
-      required: false,
-      select: false, // ! Avoid sending session token in response
+    authentication: {
+      password: {
+        type: String,
+        required: true,
+        select: false, // ! Avoid sending password in response
+      },
+      salt: {
+        type: String,
+        required: true,
+        select: false, // ! Avoid sending salt in response
+      },
+      sessionToken: {
+        type: String,
+        required: false,
+        select: false, // ! Avoid sending session token in response
+      },
     },
   },
-});
+  {
+    versionKey: false,
+  }
+);
 
 // * actions
 export const UserModel = mongoose.model("User", UserSchema);
