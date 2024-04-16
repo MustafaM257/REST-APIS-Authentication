@@ -49,9 +49,7 @@ export const login = async (req: express.Request, res: express.Response) => {
     const sessionToken = authentication(salt, random());
     user.authentication.sessionToken = sessionToken;
     await user.save();
-    res.cookie("sessionToken", {
-      sessionToken,
-    });
+    res.cookie("sessionToken", sessionToken);
     return res.status(200).json(user).end();
   } catch (error) {
     console.log(error);

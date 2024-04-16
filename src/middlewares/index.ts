@@ -8,7 +8,7 @@ export const isAuthenticated = async (
   next: express.NextFunction
 ) => {
   try {
-    const sessionToken = req.cookies.sessionToken;
+    const sessionToken = req.cookies["sessionToken"];
     if (!sessionToken) {
       return res.sendStatus(403);
     }
@@ -17,6 +17,7 @@ export const isAuthenticated = async (
       return res.sendStatus(403);
     }
     merge(req, { user });
+    console.log("User is authenticated");
     return next();
   } catch (error) {
     console.log(error);
