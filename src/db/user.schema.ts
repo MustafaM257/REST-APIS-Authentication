@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
       required: true,
       select: false, // ! Avoid sending salt in response
     },
-    sessionToekn: {
+    sessionToken: {
       type: String,
       required: false,
       select: false, // ! Avoid sending session token in response
