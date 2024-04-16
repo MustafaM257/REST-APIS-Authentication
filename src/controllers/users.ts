@@ -14,3 +14,8 @@ export const getAllUsers = async (
     return res.sendStatus(400);
   }
 };
+
+export const deleteUser = async (
+  req: express.Request,
+  res: express.Response
+) => {};
