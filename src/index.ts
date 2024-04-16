@@ -4,6 +4,11 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
+import mongoose from "mongoose";
+// ? Dotenv import and config
+import * as dotenv from "dotenv";
+dotenv.config();
+// ? End of Dotenv import and config
 
 const app = express();
 
@@ -18,7 +23,7 @@ app.use(
 app.use(compression());
 
 // * Cookie Parser: Parse Cookie header and populate req.cookies with an object keyed by the cookie names.
-app.use(cookiePraser());
+app.use(cookieParser());
 
 // * Body Parser: Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 app.use(bodyParser.json());
@@ -28,6 +33,8 @@ const server = http.createServer(app);
 server.listen(8080, () => {
   console.log("Server is running on port 8080");
 });
-// app.listen(8080, () => {
-//   console.log("Server is running on port 8080");
-// });
+mongoose.Promise = Promise;
+mongoose.connect(process.env.MONGO_URI as string);
+mongoose.connection.on("error", (error: Error) => {
+  console.log(error);
+});
